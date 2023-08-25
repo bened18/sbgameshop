@@ -5,8 +5,16 @@
 # Descripción: 
 El proyecto SBGAMESHOP tiene como objetivo desarrollar una aplicación web de comercio electrónico que permita a los usuarios explorar y adquirir una amplia gama de productos relacionados con videojuegos, como consolas, controles, videojuegos y accesorios. La aplicación se construirá utilizando el marco de desarrollo Django y se desplegará inicialmente utilizando la base de datos SQLite, con una futura migración a PostgreSQL.
 
-# Alcance del Proyecto: 
-El alcance del proyecto abarca el diseño y desarrollo de una plataforma intuitiva y fácil de usar que brinde a los usuarios una experiencia de compra en línea similar a la de reconocidas plataformas como Amazon y Mercado Libre. Los usuarios podrán navegar por la tienda y visualizar todos los productos disponibles sin necesidad de registro. Una vez registrados, podrán agregar productos a un carrito de compras, gestionar su carrito y realizar pedidos. El proyecto se centrará en la funcionalidad esencial de compra y gestión de pedidos, dejando espacio para futuras expansiones y mejoras.
+# Ejecutar el programa
+- Asegurese de tener Django instalado
+- Debe estar en la ruta taller_1/purchase_order para poder correr Django
+- Una vez este en la ruta haga las migraciones de la siguiente forma en la consola
+	 - python manage.py makemigrations
+	 - python manage.py migrate
+- Ahora podemos iniciar Django con el siguiente codigo de consola
+	 - python manage.py runserver
+
+### Ahora puede acceder a la url donde se este ejecutando Django y puede ver el menu inicial
 
 # Integrantes
 - Benjamin Eduardo De La Torre Rojas
