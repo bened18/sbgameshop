@@ -7,7 +7,7 @@ El proyecto SBGAMESHOP tiene como objetivo desarrollar una aplicación web de co
 
 # Ejecutar el programa
 - Asegurese de tener Django instalado
-- Debe estar en la ruta taller_1/purchase_order para poder correr Django
+- Debe estar en la ruta donde haya clonado el repositorio (donde este el archivo manage.py) para poder correr Django
 - Una vez este en la ruta haga las migraciones de la siguiente forma en la consola
 	 - python manage.py makemigrations
 	 - python manage.py migrate
