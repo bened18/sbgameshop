@@ -65,7 +65,14 @@ class SingOut(View):
 
 
 
+class ProductView(TemplateView): 
+    template_name = "products/products.html"
 
+    def get(self, request): 
+        viewData = {
+            "products": Product.objects.all()
+        } 
+        return render(request, self.template_name, viewData)
 
 
 

@@ -1,0 +1,28 @@
+{% extends 'products/base.html' %} 
+
+{% block content %}
+
+{% if products %}
+<div class="products-container">
+    <h1>Todos los productos disponibles</h1>
+    {% for product in products %}
+    <ul class="product-list">
+        <li class="product-item">
+            <a href="{% url 'product_detail' product_id=product.id %}">
+                <img src="{{ product.image.url }}" alt="{{ product.name }}">
+            </a>
+            <div class="product-details">
+                <a class="product-name" href="{% url 'product_detail' product_id=product.id %}">
+                    {{product.name}}
+                </a>
+                <p class="product-price">precio: {{product.price|floatformat:"3"}}</p>
+            </div>
+        </li>
+    </ul>
+    {% endfor %}
+</div>
+{% else %}
+    <h1 class="no-products">No hay productos disponibles</h1>
+{% endif %}
+
+{% endblock %}
