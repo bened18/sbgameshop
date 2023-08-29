@@ -39,7 +39,10 @@ class SingUpView(TemplateView):
             } 
         return render(request, self.template_name, viewData)
 
-
+class SingOut(View):
+    def get(self, request):
+        logout(request)
+        return redirect('home')
 
 
 
