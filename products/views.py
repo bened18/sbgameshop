@@ -1,13 +1,13 @@
-from django.shortcuts import render
-
-# Create your views here.
-
-
-
-
-
-
-
+from django.db import IntegrityError
+from django.shortcuts import redirect, render, get_object_or_404
+from django.views import View
+from django.views.generic import TemplateView
+from .models import Product, ShoppingCart, CartItem
+from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
+from django.contrib.auth.models import User
+from django.contrib.auth import login, logout, authenticate
+from django.contrib.auth.decorators import login_required
+from django.utils.decorators import method_decorator
 
 
 class SingUpView(TemplateView): 
@@ -44,43 +44,6 @@ class SingOut(View):
         logout(request)
         return redirect('home')
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-class ProductView(TemplateView): 
-    template_name = "products/products.html"
-
-    def get(self, request): 
-        viewData = {
-            "products": Product.objects.all()
-        } 
-        return render(request, self.template_name, viewData)
-
-
-
-
-
-
-
-
 class SingIn(View):
     template_name = "products/singin.html"
 
@@ -89,7 +52,7 @@ class SingIn(View):
             "form": AuthenticationForm
         } 
         return render(request, self.template_name, viewData)
-
+    
     def post(self, request):
         user = authenticate(request, username=request.POST['username'], password=request.POST['password'])
         if user is None:
@@ -101,3 +64,22 @@ class SingIn(View):
         else:
             login(request,user)
             return redirect('home')
+
+class ProductView(TemplateView): 
+    template_name = "products/products.html"
+
+    def get(self, request): 
+        viewData = {
+            "products": Product.objects.all()
+        } 
+        return render(request, self.template_name, viewData)
+
+class ProductDetail(View):
+    template_name = "products/product_detail.html"
+
+    def get(self, request, product_id):
+        product = get_object_or_404(Product, pk=product_id)
+        viewData = {
+            "product": product
+        } 
+        return render(request, self.template_name, viewData)

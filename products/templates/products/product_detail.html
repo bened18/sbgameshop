@@ -1,0 +1,29 @@
+{% extends 'products/base.html' %}
+
+{% block content %}
+
+
+    <div class="product-detail-container">
+        <div class="product-detail-image">
+            <img src="{{ product.image.url }}" alt="{{ product.name }}">
+        </div>
+        <div class="product-detail-details">
+            <h2 class="product-detail-name">{{ product.name }}</h2>
+            <h3 class="product-detail-name">Descripción</h3>
+            <p class="product-detail-description">{{ product.description }}</p>
+            <p class="product-detail-description"><strong>Categoria:</strong> {{ product.category }}</p>
+            <p class="product-detail-description"> <strong>Plataforma:</strong> {{ product.platform }}</p>
+            <p class="product-detail-price">Precio: {{ product.price|floatformat:"3" }}</p>
+            {% if user.is_authenticated %}
+                <form action="{% url 'add_to_cart' product_id=product.id %}" method="POST">
+                    {% csrf_token %}
+                    <button class="add-to-cart-button" type="submit">Añadir al carrito</button>
+                </form>
+            {% else %}
+            <a class="add-to-cart-button" href="{% url 'singin' %}" class="auth-link">Añadir al carrito</a>
+            {% endif %}
+        </div>
+    </div>
+
+
+{% endblock %}
