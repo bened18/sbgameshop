@@ -84,7 +84,7 @@ class ProductDetail(View):
         } 
         return render(request, self.template_name, viewData)
     
-    class CartView(View):
+class CartView(View):
     template_name = "products/cart.html"
     
     @method_decorator(login_required)
