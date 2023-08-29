@@ -1,0 +1,37 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="{% static '/styles/products.css' %}">
+    <title>{% block title %}'Shipping Orders'{% endblock %}</title>
+  </head>
+
+  <body class="body">
+    <nav class="navbar">
+      <div class="navbar-container">
+        <div class="navbar-div navbar-content">
+          <a href="{% url 'home' %}" class="logo">SBGameShop</a>
+          <div class="navbar-div navbar-buttons">
+              {% if user.is_authenticated %}
+              <a href="{% url 'view_cart' %}" class="auth-link">Shipping Cart</a>
+              <a href="{% url 'singout' %}" class="auth-link">Log Out</a>
+              {% else %}
+              <a href="{% url 'singin' %}" class="auth-link">Sing In</a>
+              <a href="{% url 'singup' %}" class="auth-link">Sing Up</a>
+              {% endif %}
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <div class="page-container">
+      {% block content %} 
+
+      {% endblock %}
+    </div>
+
+
+  </body>
+</html>
