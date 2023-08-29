@@ -83,3 +83,46 @@ class ProductDetail(View):
             "product": product
         } 
         return render(request, self.template_name, viewData)
+    
+    class CartView(View):
+    template_name = "products/cart.html"
+    
+    @method_decorator(login_required)
+    def get(self, request):
+        user = self.request.user
+        cart, created = ShoppingCart.objects.get_or_create(user=user)
+        cart_items = cart.cart_items.all()
+        viewData = {
+            'cart': cart,
+            'cart_items': cart_items
+        }
+        return render(request, self.template_name, viewData)
+
+class AddToCart(View):
+    try:
+        @method_decorator(login_required)
+        def post(self, request, product_id):
+            product = get_object_or_404(Product, pk=product_id)
+            cart, created = ShoppingCart.objects.get_or_create(user=self.request.user)
+
+            cart_item, item_created = CartItem.objects.get_or_create(cart=cart, product=product)
+            if not item_created:
+                cart_item.quantity += 1
+                cart_item.save()
+
+            cart.calculate_total_cost()
+            
+            return redirect('view_cart')
+    except:
+            redirect('singupform')
+    
+class DeleteCartItem(View):
+
+    @method_decorator(login_required)
+    def post(self, request, cart_item_id):
+        cart_item = CartItem.objects.get(id=cart_item_id)
+        # Eliminar el artículo del carrito
+        cart_item.delete()
+        # Redirigir de vuelta a la vista del carrito
+        return redirect('view_cart')
+    

@@ -1,0 +1,361 @@
+/* Estilos generales */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+}
+
+/* Estilos para el encabezado */
+.navbar {
+    background-color: #232f3e;
+    color: #fff;
+    padding: 10px 0;
+}
+
+.navbar .navbar-div {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.navbar-content{
+    padding: 0 20px;
+}
+
+.navbar-buttons{
+    gap: 8px;
+}
+
+.navbar a {
+    color: #fff;
+    text-decoration: none;
+    font-size: 16px;
+    transition: color 0.2s;
+}
+
+.navbar a:hover {
+    color: #ffc800;
+}
+
+/* Estilos para el logo */
+.navbar a.logo {
+    flex-grow: 1;
+    font-size: 24px;
+    font-weight: bold;
+}
+
+/* Estilos para los enlaces de inicio de sesión/registro */
+.navbar a.auth-link {
+    background-color: #ffc800;
+    color: #232f3e;
+    border-radius: 4px;
+    padding: 8px 15px;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+.navbar a.auth-link:hover {
+    background-color: #e5b800;
+}
+
+
+/* Estilos para la pagina de LogIn */
+.login-form-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.login-form {
+    margin: 10px;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    max-width: 400px;
+    width: 100%;
+}
+
+.login-form h2 {
+    font-size: 24px;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.login-form label {
+    display: block;
+    margin-bottom: 8px;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.login-form input[type="text"],
+.login-form input[type="password"] {
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    margin-bottom: 20px;
+}
+
+.login-form button {
+    background-color: #f0c14b;
+    border: none;
+    color: #111;
+    font-size: 18px;
+    padding: 10px 20px;
+    cursor: pointer;
+    width: 100%;
+    transition: background-color 0.3s;
+}
+
+.login-form button:hover {
+    background-color: #d89f32;
+}
+
+.login-help-container {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    max-width: 440px;
+    width: 100%;
+    display: block;
+    margin: auto;
+    text-align: center;
+}
+
+.login-help-container div {
+    margin-bottom: 50px;
+}
+
+.login-help-container a {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    color: #111;
+    font-size: 18px;
+    padding: 10px 20px;
+    cursor: pointer;
+    width: 100%;
+    transition: background-color 0.3s;
+}
+
+.login-help-container a:hover {
+    background-color: #dfdfdf;
+}
+
+/* Estilos para la lista de productos */
+.products-container {
+    margin: 1%;
+    padding: 20px;
+}
+
+.product-list {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap; /* Para que los productos se ajusten automáticamente en una línea */
+}
+
+.product-item {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    margin: 10px;
+    flex: 1;
+    display: flex;
+    align-items: flex-start; /* Alinear arriba para que el contenido esté alineado en la parte superior */
+    padding: 10px;
+}
+
+.product-item img {
+    min-width: 100px;
+    max-width: 100px; /* Tamaño máximo de la imagen */
+    min-height: 110px; /* Altura mínima de la imagen */
+    max-height: 110px;
+    margin-right: 10px; /* Espacio entre imagen y detalles */
+}
+
+.product-details {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1; /* Permite que los detalles ocupen todo el espacio restante */
+}
+
+.product-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.product-name {
+    font-size: 18px;
+    margin-bottom: 5px;
+    display: block;
+    text-decoration: none;
+}
+
+.product-name:visited {
+    text-decoration: none;
+    color: black;
+}
+
+.product-price {
+    font-size: 16px;
+    font-weight: bold;
+    color: #e77600;
+}
+
+/* Estilos para el encabezado */
+.header {
+    background-color: #232f3e;
+    color: #fff;
+    padding: 10px 0;
+    text-align: center;
+    font-size: 24px;
+}
+
+/* Estilos para el mensaje sin productos */
+.no-products {
+    text-align: center;
+    font-size: 18px;
+    margin-top: 50px;
+}
+
+/* Estilos para el enlace de volver a la tienda */
+.back-link {
+    display: inline-block;
+    margin-top: 20px;
+    color: #007bff;
+    text-decoration: none;
+}
+
+.back-link:hover {
+    text-decoration: underline;
+}
+
+/* Estilos para la página de detalles del producto */
+.page-container, .navbar-container {
+    max-width: 1080px;
+    margin: auto;
+}
+
+.product-detail-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding: 20px;
+}
+
+.product-detail-image img {
+    max-width: 400px;
+    height: auto;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.product-detail-details {
+    flex: 1;
+    margin-left: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.product-detail-name {
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+
+.product-detail-price {
+    font-size: 20px;
+    font-weight: bold;
+    color: #e77600;
+    margin-bottom: 10px;
+}
+
+.product-detail-description {
+    font-size: 16px;
+    text-align: justify;
+    line-height: 1.4;
+    margin-bottom: 20px;
+}
+
+.add-to-cart-button {
+    background-color: #f0c14b;
+    border: none;
+    color: #111;
+    font-size: 16px;
+    padding: 10px 20px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.add-to-cart-button:hover {
+    background-color: #d89f32;
+}
+
+/* Estilos para la página del carrito de compras */
+.cart-container {
+    margin: 1%;
+    padding: 20px;
+}
+
+.cart-item {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    margin: 10px 0;
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.cart-item img {
+    max-width: 100px;
+    height: auto;
+    margin-right: 20px;
+}
+
+.cart-item-details {
+    flex: 1;
+}
+
+.cart-item-name {
+    font-size: 18px;
+    margin-bottom: 10px;
+}
+
+.cart-item-quantity {
+    font-size: 16px;
+    color: #666;
+    margin-bottom: 5px;
+}
+
+.cart-item-price {
+    font-size: 16px;
+    font-weight: bold;
+    color: #e77600;
+}
+
+.cart-total {
+    margin-top: 20px;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.cart-button {
+    background-color: #f0c14b;
+    border: none;
+    color: #111;
+    font-size: 16px;
+    padding: 10px 20px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.cart-button:hover {
+    background-color: #d89f32;
+}

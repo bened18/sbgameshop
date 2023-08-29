@@ -1,0 +1,33 @@
+{% extends 'products/base.html' %}
+
+{% block content %}
+<div class="cart-container">
+    <h1>Carrito de Compras</h1>
+    {% if cart_items %}
+        {% for cart_item in cart_items %}
+        <div class="cart-item">
+            <img src="{{ cart_item.product.image.url }}" alt="{{ cart_item.product.name }}">
+            <div class="cart-item-details">
+                <p class="cart-item-name">{{ cart_item.product.name }}</p>
+                <p class="cart-item-quantity">Cantidad: {{ cart_item.quantity }}</p>
+                <p class="cart-item-price">Precio: ${{ cart_item.subtotal|floatformat:"3" }}</p>
+            </div>
+            <form action="{% url 'delete_cart_item' cart_item_id=cart_item.id %}" method="POST">
+                {% csrf_token %}
+                <button class="cart-button">Eliminar del carrito</button>
+            </form>
+        </div>
+        {% endfor %}
+        <div class="cart-total">
+            <p>Costo Total: ${{ cart.total_cost|floatformat:"3" }}</p> 
+        </div>
+        <button class="cart-button">Proceder al pago</button>
+    {% else %}
+        <h1 class="no-products">No tienes productos en el carrito aún</h1>
+        <form action="{% url 'home' %}">
+            {% csrf_token %}
+            <button class="cart-button">Ir a comprar</button>
+        </form>
+    {% endif %}
+</div>
+{% endblock %}
