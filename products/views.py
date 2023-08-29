@@ -10,7 +10,34 @@ from django.shortcuts import render
 
 
 
+class SingUpView(TemplateView): 
+    template_name = "products/singup.html"
 
+    def get(self, request):
+        viewData = {
+            "form": UserCreationForm
+        } 
+        return render(request, self.template_name, viewData)
+
+    def post(self, request):
+        if request.POST['password1'] == request.POST['password2']:
+            try:
+                #registrar usuario
+                user = User.objects.create_user(username=request.POST['username'], password=request.POST['password1'])
+                user.save()
+                login(request, user)
+                return redirect('home')
+            except IntegrityError:
+                viewData = {
+                    "form": UserCreationForm,
+                    "message": "el usuario ya existe"
+                } 
+                return render(request, self.template_name, viewData)
+        viewData = {
+                "form": UserCreationForm,
+                "message": "las contraseñas no son iguales"
+            } 
+        return render(request, self.template_name, viewData)
 
 
 

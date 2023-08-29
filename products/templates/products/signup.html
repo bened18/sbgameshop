@@ -1,0 +1,24 @@
+{% extends 'products/base.html' %} 
+{% block content %}
+
+
+<div class="login-form-container">
+    {{message}}
+    <form class="login-form" action="/singup/" method="post">
+        {% csrf_token %}
+        <h2>Registrarse en SBGAMESHOP</h2>
+        {{form.as_p}}
+        <button>
+            SignUp
+        </button>
+    </form>
+</div>
+
+<div class="login-help-container">
+    <div>
+        <p>¿Ya tienes una cuenta?</p>
+        <a href="/singin/">Inicia Sesion</a>
+    </div>
+</div>
+
+{% endblock %}
