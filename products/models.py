@@ -19,7 +19,7 @@ class ShoppingCart(models.Model):
     total_cost = models.FloatField(default=0)
 
     def calculate_total_cost(self):
-        self.total_cost = sum(item.product.price for item in self.cart_items.all())
+        self.total_cost = sum(item.subtotal for item in self.cart_items.all())
         self.save()
     
 class CartItem(models.Model):

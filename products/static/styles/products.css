@@ -174,8 +174,6 @@ body {
 .product-item img {
     min-width: 100px;
     max-width: 100px; /* Tamaño máximo de la imagen */
-    min-height: 110px; /* Altura mínima de la imagen */
-    max-height: 110px;
     margin-right: 10px; /* Espacio entre imagen y detalles */
 }
 
