@@ -357,3 +357,28 @@ body {
 .cart-button:hover {
     background-color: #d89f32;
 }
+
+/* Estilos para el carrusel */
+.carousel {
+    display: flex;
+    overflow-x: scroll;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+}
+
+.carousel-item {
+    flex: 0 0 auto;
+    scroll-snap-align: start;
+    margin-right: 20px;
+    width: 250px; /* Ajusta el ancho según tus necesidades */
+}
+
+.carousel img {
+    max-width: 100%;
+    height: auto;
+}
+
+.carousel-details {
+    padding: 10px;
+    background-color: #f4f4f4;
+}

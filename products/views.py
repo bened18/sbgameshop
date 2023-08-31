@@ -2,7 +2,7 @@ from django.db import IntegrityError
 from django.shortcuts import redirect, render, get_object_or_404
 from django.views import View
 from django.views.generic import TemplateView
-from .models import Product, ShoppingCart, CartItem
+from .models import Product, ShoppingCart, CartItem, Genre
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth.models import User
 from django.contrib.auth import login, logout, authenticate
@@ -73,6 +73,28 @@ class ProductView(TemplateView):
             "products": Product.objects.all()
         } 
         return render(request, self.template_name, viewData)
+
+class SearchResultsView(View):
+    template_name = "products/search_results.html"
+
+    def get(self, request):
+        query = request.GET.get('query', '')
+        products = Product.objects.filter(name__icontains=query)
+        viewData = {
+            "products": products,
+            "query": query  # Pasamos el término de búsqueda a la plantilla
+        }
+        return render(request, self.template_name, viewData)
+
+class FilterResultsView(TemplateView): 
+    template_name = "products/filter_results.html"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['categories'] = Product.objects.order_by('category').values_list('category', flat=True).distinct()
+        context['platforms'] = Product.objects.order_by('platform').values_list('platform', flat=True).distinct()
+        # Lógica para filtrar productos por categoría y plataforma
+        return context
 
 class ProductDetail(View):
     template_name = "products/product_detail.html"

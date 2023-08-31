@@ -1,11 +1,13 @@
 from django.urls import path
 from .views import ProductView, ProductDetail, AddToCart
 from .views import SingUpView, SingOut, SingIn, CartView
-from .views import DeleteCartItem
+from .views import DeleteCartItem, SearchResultsView, FilterResultsView
 
 
 urlpatterns = [
     path('',ProductView.as_view(), name='home'),
+    path('search/', SearchResultsView.as_view(), name='search_results'),
+    path('filter/', FilterResultsView.as_view(), name='filter_results'),
     path('singupform/', SingUpView.as_view(), name='singupform'),
     path('singup/', SingUpView.as_view(), name='singup'),
     path('product/<int:product_id>/', ProductDetail.as_view(), name='product_detail'),

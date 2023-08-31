@@ -14,13 +14,14 @@
         <div class="navbar-div navbar-content">
           <a href="{% url 'home' %}" class="logo">SBGameShop</a>
           <div class="navbar-div navbar-buttons">
-              {% if user.is_authenticated %}
+            {% include 'products/filter_bar.html' %}
+            {% if user.is_authenticated %}
               <a href="{% url 'view_cart' %}" class="auth-link">Shipping Cart</a>
               <a href="{% url 'singout' %}" class="auth-link">Log Out</a>
-              {% else %}
+            {% else %}
               <a href="{% url 'singin' %}" class="auth-link">Sing In</a>
               <a href="{% url 'singup' %}" class="auth-link">Sing Up</a>
-              {% endif %}
+            {% endif %}
           </div>
         </div>
       </div>
@@ -31,7 +32,5 @@
 
       {% endblock %}
     </div>
-
-
   </body>
 </html>
