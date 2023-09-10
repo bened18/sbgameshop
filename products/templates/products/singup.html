@@ -4,7 +4,7 @@
 
 <div class="login-form-container">
     {{message}}
-    <form class="login-form" action="/singup/" method="post">
+    <form class="login-form" action="/singupform/" method="post">
         {% csrf_token %}
         <h2>Registrarse en SBGAMESHOP</h2>
         {{form.as_p}}
