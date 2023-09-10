@@ -134,8 +134,10 @@ class ProductDetail(View):
     template_name = "products/product_detail.html"
 
     def get(self, request, product_id):
+        #miramos si el producto existe en la base de datos
         product = get_object_or_404(Product, pk=product_id)
         viewData = {
+            #enviamos la informacion del producto obtenido
             "product": product
         } 
         return render(request, self.template_name, viewData)
@@ -143,10 +145,13 @@ class ProductDetail(View):
 class CartView(View):
     template_name = "products/cart.html"
     
+    #verificamos que el usuario este logeado
     @method_decorator(login_required)
     def get(self, request):
         user = self.request.user
+        #traemos la información del carrito de compras de ese usuario
         cart, created = ShoppingCart.objects.get_or_create(user=user)
+        #obtenemos cada uno de los productos del carrito
         cart_items = cart.cart_items.all()
         viewData = {
             'cart': cart,
@@ -155,22 +160,25 @@ class CartView(View):
         return render(request, self.template_name, viewData)
 
 class AddToCart(View):
+    #el usuario debe estar logeado
     @method_decorator(login_required)
     def post(self, request, product_id):
+        #buscamos el producto que quiere agregar al carrito en la base de datos
         product = get_object_or_404(Product, pk=product_id)
+        #obtenemos el carrito de compras del usuario
         cart, _ = ShoppingCart.objects.get_or_create(user=request.user)
-
         cart_item, item_created = CartItem.objects.get_or_create(cart=cart, product=product)
+        #si no existia ese producto en el carrito de suma 1 a la cantidad
         if not item_created:
             cart_item.quantity += 1
+            #guardamos el producto
             cart_item.save()
-
-        cart.calculate_total_cost()  # Debes actualizar el costo total después de cada modificación
-
+        #Se actualiza el costo total del carrito
+        cart.calculate_total_cost()  
         return redirect('view_cart')
     
 class DeleteCartItem(View):
-
+    #el usuario debe estar logeado    
     @method_decorator(login_required)
     def post(self, request, cart_item_id):
         cart_item = CartItem.objects.get(id=cart_item_id)
