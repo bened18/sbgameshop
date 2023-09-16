@@ -12,7 +12,7 @@
     <nav class="navbar">
       <div class="navbar-container">
         <div class="navbar-div navbar-content">
-          <a href="{% url 'home' %}" class="logo">SBGameShop</a>
+          <a href="{% url 'home' %}" class="logo"><img src="/sbgameshop/product_images/logo_con_fondo.png" alt="LOGO SBGAMESHOP"></a>
           <div class="navbar-div navbar-buttons">
             {% include 'products/filter_bar.html' %}
             {% if user.is_authenticated %}
