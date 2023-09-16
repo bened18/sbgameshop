@@ -1,157 +1,171 @@
 from django.db import IntegrityError
 from django.shortcuts import redirect, render, get_object_or_404
+from django.urls import reverse_lazy
 from django.views import View
-from django.views.generic import TemplateView
+from django.views.generic import TemplateView, FormView
+
+from .form import AddProductForm
 from .models import Product, ShoppingCart, CartItem, Genre
+from customuser.models import CustomUser
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
-from django.contrib.auth.models import User
 from django.contrib.auth import login, logout, authenticate
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
 
 
-class SingUpView(TemplateView): 
+class SingUpView(TemplateView):
     template_name = "products/singup.html"
 
-    #Si el metodo es 'get' se envia el formulario de creación de usuario
+    # Si el metodo es 'get' se envia el formulario de creación de usuario
     def get(self, request):
         viewData = {
-            #formulario de creación de usuario con la clase 'django.contrib.auth.forms'
+            # formulario de creación de usuario con la clase 'django.contrib.auth.forms'
             "form": UserCreationForm
-        } 
+        }
         return render(request, self.template_name, viewData)
 
-    #si el metodo es 'post' se valida la creación del usuario
+    # si el metodo es 'post' se valida la creación del usuario
     def post(self, request):
-        #Validamos que las contraseñas coincidan
+        # Validamos que las contraseñas coincidan
         if request.POST['password1'] == request.POST['password2']:
-            #tratamos de registrar al usuario en la base de datos
+            # tratamos de registrar al usuario en la base de datos
             try:
-                #registrar usuario enviando el 'username' y la 'password'
-                user = User.objects.create_user(username=request.POST['username'], password=request.POST['password1'])
-                #guardamos el usuario en la base de datos
+                # registrar usuario enviando el 'username' y la 'password'
+                user = CustomUser.objects.create_user(
+                    username=request.POST['username'], password=request.POST['password1'])
+                # guardamos el usuario en la base de datos
                 user.save()
-                #iniciamos sesion automaticamente
+                # iniciamos sesion automaticamente
                 login(request, user)
-                #redirigimos a la url de home
+                # redirigimos a la url de home
                 return redirect('home')
-            #si no pudimos registrar al usuario es por que ya existe en la base de datos
+            # si no pudimos registrar al usuario es por que ya existe en la base de datos
             except IntegrityError:
                 viewData = {
-                    #volvemos a enviar el formulario
+                    # volvemos a enviar el formulario
                     "form": UserCreationForm,
-                    #enviamos un mensaje de error
+                    # enviamos un mensaje de error
                     "message": "el usuario ya existe"
-                } 
+                }
                 return render(request, self.template_name, viewData)
-        #si las contraseñas no son iguales le pedimos que vuelva a intentar
+        # si las contraseñas no son iguales le pedimos que vuelva a intentar
         else:
             viewData = {
-                     #volvemos a enviar el formulario
-                    "form": UserCreationForm,
-                    #enviamos un mensaje de error
-                    "message": "las contraseñas no son iguales"
-                } 
+                # volvemos a enviar el formulario
+                "form": UserCreationForm,
+                # enviamos un mensaje de error
+                "message": "las contraseñas no son iguales"
+            }
             return render(request, self.template_name, viewData)
+
 
 class SingOut(View):
     def get(self, request):
-        #Se cierra sesion
+        # Se cierra sesion
         logout(request)
         return redirect('home')
+
 
 class SingIn(View):
     template_name = "products/singin.html"
 
-    #si el metodo es 'get' se envia el formulario para iniciar sesion
+    # si el metodo es 'get' se envia el formulario para iniciar sesion
     def get(self, request):
         viewData = {
-            #formulario de inicio de sesion con la clase 'django.contrib.auth.forms'
+            # formulario de inicio de sesion con la clase 'django.contrib.auth.forms'
             "form": AuthenticationForm
-        } 
+        }
         return render(request, self.template_name, viewData)
-    
-    #si el metodo es 'post' se valida el formulario
+
+    # si el metodo es 'post' se valida el formulario
     def post(self, request):
-        #se verifica que el usuario coincida con la base de datos
-        user = authenticate(request, username=request.POST['username'], password=request.POST['password'])
-        #si el usuario no existe
+        # se verifica que el usuario coincida con la base de datos
+        user = authenticate(
+            request, username=request.POST['username'], password=request.POST['password'])
+        # si el usuario no existe
         if user is None:
             viewData = {
-            #se vueve a enviar el form
-            "form": AuthenticationForm,
-            #se envia mensaje de error
-            "message": 'Usuario o contraseña incorrecto'
-            } 
+                # se vueve a enviar el form
+                "form": AuthenticationForm,
+                # se envia mensaje de error
+                "message": 'Usuario o contraseña incorrecto'
+            }
             return render(request, self.template_name, viewData)
-        #si el usuario si existe
+        # si el usuario si existe
         else:
-            #se inicia sesion
-            login(request,user)
+            # se inicia sesion
+            login(request, user)
             return redirect('home')
 
-class ProductView(TemplateView): 
+
+class ProductView(TemplateView):
     template_name = "products/products.html"
 
-    #Mostrar todos los productos de la base de datos
-    def get(self, request): 
+    # Mostrar todos los productos de la base de datos
+    def get(self, request):
         viewData = {
-            #Obtenemos todos los productos de la base de datos
-            "products": Product.objects.all() 
+            # Obtenemos todos los productos de la base de datos
+            "products": Product.objects.all()
         }
-        #Enviamos todos los productos a products.html para ser mostrados
+        # Enviamos todos los productos a products.html para ser mostrados
         return render(request, self.template_name, viewData)
+
 
 class SearchResultsView(View):
     template_name = "products/search_results.html"
 
-    #Mostrar el producto buscado por la barra de busqueda
+    # Mostrar el producto buscado por la barra de busqueda
     def get(self, request):
-        #Obtenemos el string de lo que se esta buscando
+        # Obtenemos el string de lo que se esta buscando
         query = request.GET.get('query', '')
-        #Filtramos por productos que contengan el query
+        # Filtramos por productos que contengan el query
         products = Product.objects.filter(name__icontains=query)
         viewData = {
-            #Enviamos los productos que coincidan
+            # Enviamos los productos que coincidan
             "products": products,
             # Enviamos el string de búsqueda a la plantilla
             "query": query
         }
-        #se envia el diccionario viewData a 'search_results.html'
+        # se envia el diccionario viewData a 'search_results.html'
         return render(request, self.template_name, viewData)
 
-class FilterResultsView(TemplateView): 
+
+class FilterResultsView(TemplateView):
     template_name = "products/filter_results.html"
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['categories'] = Product.objects.order_by('category').values_list('category', flat=True).distinct()
-        context['platforms'] = Product.objects.order_by('platform').values_list('platform', flat=True).distinct()
+        context['categories'] = Product.objects.order_by(
+            'category').values_list('category', flat=True).distinct()
+        context['platforms'] = Product.objects.order_by(
+            'platform').values_list('platform', flat=True).distinct()
         # Lógica para filtrar productos por categoría y plataforma
         return context
+
 
 class ProductDetail(View):
     template_name = "products/product_detail.html"
 
     def get(self, request, product_id):
-        #miramos si el producto existe en la base de datos
+        # miramos si el producto existe en la base de datos
         product = get_object_or_404(Product, pk=product_id)
         viewData = {
-            #enviamos la informacion del producto obtenido
+            # enviamos la informacion del producto obtenido
             "product": product
-        } 
+        }
         return render(request, self.template_name, viewData)
-    
+
+
 class CartView(View):
     template_name = "products/cart.html"
-    
-    #verificamos que el usuario este logeado
+
+    # verificamos que el usuario este logeado
     @method_decorator(login_required)
     def get(self, request):
         user = self.request.user
-        #traemos la información del carrito de compras de ese usuario
+        # traemos la información del carrito de compras de ese usuario
         cart, created = ShoppingCart.objects.get_or_create(user=user)
-        #obtenemos cada uno de los productos del carrito
+        # obtenemos cada uno de los productos del carrito
         cart_items = cart.cart_items.all()
         viewData = {
             'cart': cart,
@@ -159,26 +173,29 @@ class CartView(View):
         }
         return render(request, self.template_name, viewData)
 
+
 class AddToCart(View):
-    #el usuario debe estar logeado
+    # el usuario debe estar logeado
     @method_decorator(login_required)
     def post(self, request, product_id):
-        #buscamos el producto que quiere agregar al carrito en la base de datos
+        # buscamos el producto que quiere agregar al carrito en la base de datos
         product = get_object_or_404(Product, pk=product_id)
-        #obtenemos el carrito de compras del usuario
+        # obtenemos el carrito de compras del usuario
         cart, _ = ShoppingCart.objects.get_or_create(user=request.user)
-        cart_item, item_created = CartItem.objects.get_or_create(cart=cart, product=product)
-        #si no existia ese producto en el carrito de suma 1 a la cantidad
+        cart_item, item_created = CartItem.objects.get_or_create(
+            cart=cart, product=product)
+        # si no existia ese producto en el carrito de suma 1 a la cantidad
         if not item_created:
             cart_item.quantity += 1
-            #guardamos el producto
+            # guardamos el producto
             cart_item.save()
-        #Se actualiza el costo total del carrito
-        cart.calculate_total_cost()  
+        # Se actualiza el costo total del carrito
+        cart.calculate_total_cost()
         return redirect('view_cart')
-    
+
+
 class DeleteCartItem(View):
-    #el usuario debe estar logeado    
+    # el usuario debe estar logeado
     @method_decorator(login_required)
     def post(self, request, cart_item_id):
         cart_item = CartItem.objects.get(id=cart_item_id)
@@ -189,4 +206,33 @@ class DeleteCartItem(View):
         cart.calculate_total_cost()
         # Redirigir de vuelta a la vista del carrito
         return redirect('view_cart')
+
+@method_decorator(login_required, name='dispatch')
+class AddProductView(FormView):
+    template_name = "products/add_product_form.html"
+    form_class = AddProductForm
+    success_url = reverse_lazy('home')
+
+    def dispatch(self, request, *args, **kwargs):
+        user = CustomUser.objects.get(id=request.user.id)
+        if not request.user.is_authenticated or not user.is_editor:
+            return redirect('home')
+        return super().dispatch(request, *args, **kwargs)
+
+    def form_valid(self, form):
+        # Crear un nuevo producto utilizando los datos del formulario
+        product = Product(
+            name=form.cleaned_data['name'],
+            category=form.cleaned_data['category'],
+            platform=form.cleaned_data['platform'],
+            description=form.cleaned_data['description'],
+            price=form.cleaned_data['price'],
+            image=form.cleaned_data['image'],
+        )
+        product.save()
+        product.genres.set(form.cleaned_data['genres'])
+
+        return super().form_valid(form)
+    
+
     

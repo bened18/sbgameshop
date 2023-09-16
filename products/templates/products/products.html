@@ -4,9 +4,14 @@
     <div class="products-container">
         {% for product in products %}   
             <div class="product-container">
-                <a href="{% url 'product_detail' product_id=product.id %}">
-                    <img src="{{ product.image.url }}" alt="{{ product.name }}">
-                </a>
+                {% if product.image %}
+                    <a href="{% url 'product_detail' product_id=product.id %}">
+                        <img src="{{ product.image.url }}" alt="{{ product.name }}">
+                    </a>
+                {% else %}
+                        <img src="/sbgameshop/product_images/logo_con_fondo.png" alt="{{ product.name }}">
+                        {# Reemplaza 'path/to/placeholder_image.png' con la ruta de tu imagen de marcador de posición predeterminada #}
+                {% endif %}
                 <a class="product-name" href="{% url 'product_detail' product_id=product.id %}">
                     {{product.name}}
                 </a>
