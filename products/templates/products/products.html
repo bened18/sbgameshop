@@ -10,12 +10,17 @@
                     </a>
                 {% else %}
                         <img src="/sbgameshop/product_images/logo_con_fondo.png" alt="{{ product.name }}">
-                        {# Reemplaza 'path/to/placeholder_image.png' con la ruta de tu imagen de marcador de posición predeterminada #}
                 {% endif %}
                 <a class="product-name" href="{% url 'product_detail' product_id=product.id %}">
                     {{product.name}}
                 </a>
-                <p>precio: ${{product.price|floatformat:"3"}}</p>       
+                <p>precio: ${{product.price|floatformat:"3"}}</p>
+                {% if user.is_editor %}
+                    <form method="post" action="{% url 'delete_product' product_id=product.id %}">
+                        {% csrf_token %}
+                        <button type="submit" class="btn btn-danger">Eliminar</button>
+                    </form>
+                {% endif %}  
             </div>
         {% endfor %}
     </div>

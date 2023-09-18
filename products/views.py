@@ -234,5 +234,18 @@ class AddProductView(FormView):
 
         return super().form_valid(form)
     
+@method_decorator(login_required, name='dispatch')
+class DeleteProductView(View):
 
-    
+    def dispatch(self, request, *args, **kwargs):
+        user = CustomUser.objects.get(id=request.user.id)
+        if not request.user.is_authenticated or not user.is_editor:
+            return redirect('home')
+        return super().dispatch(request, *args, **kwargs)
+
+    def post(self, request, product_id):
+        # Obtiene el producto que se va a eliminar.
+        product = Product.objects.get(pk=product_id)
+        # Elimina el producto.
+        product.delete()
+        return redirect('home')  # Cambia 'product_list' a la URL adecuada.

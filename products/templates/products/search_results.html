@@ -4,25 +4,25 @@
     <h1>Resultados de la búsqueda para "{{ query }}"</h1>
 
     {% if products %}
-        {{products.name}}
         <div class="products-container">
-            {% for product in products %}
-                <ul class="product-list">
-                    <li class="product-item">
+            {% for product in products %}   
+                <div class="product-container">
+                    {% if product.image %}
                         <a href="{% url 'product_detail' product_id=product.id %}">
                             <img src="{{ product.image.url }}" alt="{{ product.name }}">
                         </a>
-                        <div class="product-details">
-                            <a class="product-name" href="{% url 'product_detail' product_id=product.id %}">
-                                {{product.name}}
-                            </a>
-                            <p class="product-price">precio: {{product.price|floatformat:"3"}}</p>
-                        </div>
-                    </li>
-                </ul>
+                    {% else %}
+                            <img src="/sbgameshop/product_images/logo_con_fondo.png" alt="{{ product.name }}">
+                            {# Reemplaza 'path/to/placeholder_image.png' con la ruta de tu imagen de marcador de posición predeterminada #}
+                    {% endif %}
+                    <a class="product-name" href="{% url 'product_detail' product_id=product.id %}">
+                        {{product.name}}
+                    </a>
+                    <p>precio: ${{product.price|floatformat:"3"}}</p>       
+                </div>
             {% endfor %}
         </div>
     {% else %}
-        <p>No se encontraron productos para "{{ query }}".</p>
+        <h1 class="no-products">No hay productos disponibles</h1>
     {% endif %}
 {% endblock %}
