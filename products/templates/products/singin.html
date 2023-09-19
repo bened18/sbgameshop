@@ -6,7 +6,7 @@
         <form class="login-form" action="/singin/" method="post">
             {% csrf_token %}
             <h2>Iniciar sesión en SBGAMESHOP</h2>
-            {{form.as_p}}
+            {{form.as_div}}
             <button>
                 SingIn
             </button>

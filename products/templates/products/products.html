@@ -5,16 +5,12 @@
         {% for product in products %}   
             <div class="product-container">
                 {% if product.image %}
-                    <a href="{% url 'product_detail' product_id=product.id %}">
-                        <img src="{{ product.image.url }}" alt="{{ product.name }}">
-                    </a>
+                    <a href="{% url 'product_detail' product_id=product.id %}"><img class="prodcut-container-img" src="{{ product.image.url }}" alt="{{ product.name }}"></a>
                 {% else %}
-                        <img src="/sbgameshop/product_images/logo_con_fondo.png" alt="{{ product.name }}">
+                    <img src="/media/product_images/logo_sin_fondo.png" alt="{{ product.name }}">
                 {% endif %}
-                <a class="product-name" href="{% url 'product_detail' product_id=product.id %}">
-                    {{product.name}}
-                </a>
-                <p>precio: ${{product.price|floatformat:"3"}}</p>
+                    <a class="product-container-name" href="{% url 'product_detail' product_id=product.id %}">{{product.name}}</a>
+                    <p class="prodcut-container-price">precio: ${{product.price|floatformat:"3"}}</p>
                 {% if user.is_editor %}
                     <form method="post" action="{% url 'delete_product' product_id=product.id %}">
                         {% csrf_token %}

@@ -1,8 +1,11 @@
 {% extends 'products/base.html' %}
 {% block content %}
-<form method="post" enctype="multipart/form-data">
-    {% csrf_token %}
-    {{form.as_p | safe}}
-    <button type="submit">Guardar</button>
-</form>
+<div class="login-form-container">
+    <form class="login-form" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <h2>Agregar nuevo producto</h2>
+        {{form.as_div | safe}}
+        <button type="submit">Guardar</button>
+    </form>
+</div>
 {% endblock %}

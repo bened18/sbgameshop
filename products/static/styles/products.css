@@ -1,3 +1,7 @@
+html * {
+    box-sizing: border-box;
+}
+
 /* Estilos generales */
 body {
     font-family: Arial, sans-serif;
@@ -17,9 +21,12 @@ header {
     
 }
 
-
 .logo {
     cursor: pointer;
+}
+
+.logo img {
+    height: 80px;
 }
 
 .nav__links {
@@ -43,17 +50,15 @@ header {
 
 header .filter_bar {
     display: flex;
-    margin: auto 0;
-   
+    justify-content: center;
 }
 
 header .filter_bar input {
     border: none;
     outline: none;
     background: #fff;
-    height: 100%;
-    padding: 0 10px;
-    width: 350px;
+    width: 500px;
+    height: 30px;
     border-radius: 10px;
 }
 
@@ -160,6 +165,7 @@ header .filter_bar button:hover {
     flex-wrap: wrap;
     justify-content: center;
     transition: all 400ms ease;
+    padding-top: 60px;
 }
 
 .product-container {
@@ -182,19 +188,25 @@ header .filter_bar button:hover {
 .product-container a, p {
     text-decoration: none;
     text-align: center;
-    font-size: 20px;
     font-weight: bold;
 }
 
 .product-container:hover {
-    box-shadow: 5px 5px 20px rgba(0,0,0,0.4);
-    transform: translateY(-3%);
+    box-shadow: 1px 1px 5px rgba(0,0,0,0.4);
+    transform: translateY(-1%);
+}
+
+.product-container form {
+    display: flex;
+    justify-content: center;
+    padding-bottom: 20px;
 }
 
 .delete-button {
-    background-color: rgb(86, 213, 255);
+    background-color: rgb(255, 73, 73);
     border: none;
-    color: #111;
+    border-radius: 10px;
+    color: white;
     font-size: 16px;
     padding: 10px 20px;
     cursor: pointer;
@@ -334,13 +346,14 @@ header .filter_bar button:hover {
 .cart-item-price {
     font-size: 16px;
     font-weight: bold;
-    color: #e77600;
+    color:rgb(72, 4, 72);
 }
 
 .cart-total {
     margin-top: 20px;
     font-size: 20px;
     font-weight: bold;
+    color: rgb(72, 4, 72);
 }
 
 .cart-button {

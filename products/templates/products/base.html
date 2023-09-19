@@ -5,12 +5,12 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="stylesheet" href="{% static '/styles/products.css' %}">
-    <title>{% block title %}'Shipping Orders'{% endblock %}</title>
+    <title>{% block title %}'SBGameShop'{% endblock %}</title>
   </head>
 
   <body class="body">
     <header>
-      <a href="{% url 'home' %}" class="logo"><img src="/sbgameshop/media/product_images/logo_con_fondo.png" alt="logo sbgameshop"></a>
+      <a href="{% url 'home' %}" class="logo"><img src="/media/product_images/logo_sin_fondo.png" alt="logo sbgameshop"></a>
       {% include 'products/filter_bar.html' %}
       <nav>
         <ul class="nav__links">
