@@ -7,59 +7,66 @@ body {
 }
 
 /* Estilos para el encabezado */
-.navbar {
+header {
     background-color: rgb(72, 4, 72);
-    color: #fff;
-    padding: 10px 0;
-}
-
-.navbar .navbar-div {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    max-width: 1200px;
-    margin: 0 auto;
+    padding: 30px 10%;
+    height: 10px;
+    
 }
 
-.navbar-content{
-    padding: 0 20px;
+
+.logo {
+    cursor: pointer;
 }
 
-.navbar-buttons{
-    gap: 8px;
+.nav__links {
+    list-style: none;    
 }
 
-.navbar a {
-    color: #fff;
+.nav__links li {
+    display: inline-block;
+    padding: 0px 20px;
+}
+
+.nav__links li a {
+    color: white;
     text-decoration: none;
-    font-size: 16px;
-    transition: color 0.2s;
+    transition: all 0.3s ease 0s;
 }
 
-.navbar a:hover {
-    color: rgb(0, 191, 255);
+.nav__links li a:hover {
+    color: rgb(86, 213, 255);
 }
 
-/* Estilos para el logo */
-.navbar a.logo {
-    width: 75px;
-    height: 75px;
+header .filter_bar {
+    display: flex;
+    margin: auto 0;
+   
 }
 
-/* Estilos para los enlaces de inicio de sesión/registro */
-.navbar a.auth-link {
-    background-color: rgb(86, 213, 255);
-    color: #232f3e;
-    border-radius: 4px;
-    padding: 8px 15px;
-    font-weight: bold;
-    text-transform: uppercase;
+header .filter_bar input {
+    border: none;
+    outline: none;
+    background: #fff;
+    height: 100%;
+    padding: 0 10px;
+    width: 350px;
+    border-radius: 10px;
 }
 
-.navbar a.auth-link:hover {
-    background-color: rgb(0, 191, 255);
+header .filter_bar button {
+    background-color: transparent;
+    border: none;
+    color: white;
+    cursor: pointer;
 }
 
+header .filter_bar button:hover {
+    color: rgb(86, 213, 255);
+}
 
 /* Estilos para la pagina de LogIn */
 .login-form-container {
@@ -182,6 +189,20 @@ body {
 .product-container:hover {
     box-shadow: 5px 5px 20px rgba(0,0,0,0.4);
     transform: translateY(-3%);
+}
+
+.delete-button {
+    background-color: rgb(86, 213, 255);
+    border: none;
+    color: #111;
+    font-size: 16px;
+    padding: 10px 20px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.delete-button:hover {
+    background-color: red;
 }
 
 /* Estilos para el encabezado */

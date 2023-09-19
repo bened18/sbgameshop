@@ -18,7 +18,7 @@
                 {% if user.is_editor %}
                     <form method="post" action="{% url 'delete_product' product_id=product.id %}">
                         {% csrf_token %}
-                        <button type="submit" class="btn btn-danger">Eliminar</button>
+                        <button class="delete-button" type="submit" class="btn btn-danger">Eliminar</button>
                     </form>
                 {% endif %}  
             </div>

@@ -33,10 +33,7 @@ class Product(models.Model):
     platform = models.ForeignKey(Platform, on_delete=models.CASCADE)
     description = models.TextField()
     price = models.FloatField()
-    image = models.ImageField(
-        upload_to="product_images/",
-        default="product_images\The-Witcher-3-Wild-Hunt.jpg"
-    )
+    image = models.ImageField(upload_to='product_images/')
     genres = models.ManyToManyField(Genre, blank=True)  # For video game genres
 
     def __str__(self):

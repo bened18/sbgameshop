@@ -9,26 +9,22 @@
   </head>
 
   <body class="body">
-    <nav class="navbar">
-      <div class="navbar-container">
-        <div class="navbar-div navbar-content">
-          <a href="{% url 'home' %}" class="logo"><img src="/sbgameshop/product_images/logo_con_fondo.png" alt="LOGO SBGAMESHOP"></a>
-          <div class="navbar-div navbar-buttons">
-            {% include 'products/filter_bar.html' %}
-            {% if user.is_editor %}
-            <a href="{% url 'editor_add_product' %}" class="auth-link">Add Product</a>
-            {% endif %}
-            {% if user.is_authenticated %}
-              <a href="{% url 'view_cart' %}" class="auth-link">Shipping Cart</a>
-              <a href="{% url 'singout' %}" class="auth-link">Log Out</a>
-            {% else %}
-              <a href="{% url 'singin' %}" class="auth-link">Sing In</a>
-              <a href="{% url 'singupform' %}" class="auth-link">Sing Up</a>
-            {% endif %}
-          </div>
-        </div>
-      </div>
-    </nav>
+    <header>
+      <a href="{% url 'home' %}" class="logo"><img src="/sbgameshop/media/product_images/logo_con_fondo.png" alt="logo sbgameshop"></a>
+      {% include 'products/filter_bar.html' %}
+      <nav>
+        <ul class="nav__links">
+          <li>{% if user.is_editor %}<a href="{% url 'editor_add_product' %}" class="auth-link">Add Product</a>{% endif %}</li>
+          {% if user.is_authenticated %}
+            <li><a href="{% url 'view_cart' %}" class="auth-link">Shipping Cart</a></li>
+            <li><a href="{% url 'singout' %}" class="auth-link">Log Out</a></li>
+          {% else %}
+            <li><a href="{% url 'singin' %}" class="auth-link">Sing In</a></li>
+            <li><a href="{% url 'singupform' %}" class="auth-link">Sing Up</a></li>
+          {% endif %}
+        </ul>
+      </nav>
+    </header>
 
     <div class="page-container">
       {% block content %} 
