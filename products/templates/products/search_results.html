@@ -1,4 +1,5 @@
 {% extends 'products/base.html' %}
+{% load i18n %}  <!-- Carga la biblioteca de internacionalización -->
 
 {% block content %}
     <h1>Resultados de la búsqueda para "{{ query }}"</h1>
@@ -23,6 +24,6 @@
             {% endfor %}
         </div>
     {% else %}
-        <h1 class="no-products">No hay productos disponibles</h1>
+        <h1 class="no-products">{% trans "No Products Available" %}</h1>
     {% endif %}
 {% endblock %}

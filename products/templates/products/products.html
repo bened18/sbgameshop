@@ -1,6 +1,7 @@
 {% extends 'products/base.html' %} 
 {% block content %}
 {% if products %}
+{% load i18n %}  <!-- Carga la biblioteca de internacionalización -->
     <div class="products-container">
         {% for product in products %}   
             <div class="product-container">
@@ -10,17 +11,17 @@
                     <img src="/media/product_images/logo_sin_fondo.png" alt="{{ product.name }}">
                 {% endif %}
                     <a class="product-container-name" href="{% url 'product_detail' product_id=product.id %}">{{product.name}}</a>
-                    <p class="prodcut-container-price">precio: ${{product.price|floatformat:"3"}}</p>
+                    <p class="prodcut-container-price">{% trans "Price" %}: ${{product.price|floatformat:"3"}}</p>
                 {% if user.is_editor %}
                     <form method="post" action="{% url 'delete_product' product_id=product.id %}">
                         {% csrf_token %}
-                        <button class="delete-button" type="submit" class="btn btn-danger">Eliminar</button>
+                        <button class="delete-button" type="submit" class="btn btn-danger">{% trans "Delete" %}</button>
                     </form>
                 {% endif %}  
             </div>
         {% endfor %}
     </div>
 {% else %}
-    <h1 class="no-products">No hay productos disponibles</h1>
+    <h1 class="no-products">{% trans "No Products Available" %}</h1>
 {% endif %}
 {% endblock %}

@@ -3,6 +3,8 @@ from django.shortcuts import redirect, render, get_object_or_404
 from django.urls import reverse_lazy
 from django.views import View
 from django.views.generic import TemplateView, FormView
+from django.utils.translation import gettext as _
+from django.http import HttpResponse
 
 from .form import AddProductForm
 from .models import Product, ShoppingCart, CartItem, Genre
@@ -45,7 +47,8 @@ class SingUpView(TemplateView):
                     # volvemos a enviar el formulario
                     "form": UserCreationForm,
                     # enviamos un mensaje de error
-                    "message": "el usuario ya existe"
+                    "message": "el usuario ya existe" , 
+                    "message": _("The user already exists")
                 }
                 return render(request, self.template_name, viewData)
         # si las contraseñas no son iguales le pedimos que vuelva a intentar
@@ -54,7 +57,8 @@ class SingUpView(TemplateView):
                 # volvemos a enviar el formulario
                 "form": UserCreationForm,
                 # enviamos un mensaje de error
-                "message": "las contraseñas no son iguales"
+                "message": "las contraseñas no son iguales", 
+                "message": _("Passwords do not match")
             }
             return render(request, self.template_name, viewData)
 
@@ -88,7 +92,8 @@ class SingIn(View):
                 # se vueve a enviar el form
                 "form": AuthenticationForm,
                 # se envia mensaje de error
-                "message": 'Usuario o contraseña incorrecto'
+                "message": 'Usuario o contraseña incorrecto',
+                "message": _('Incorrect username or password')  # Cadena marcada para traducción
             }
             return render(request, self.template_name, viewData)
         # si el usuario si existe

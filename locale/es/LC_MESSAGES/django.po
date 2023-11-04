@@ -1,0 +1,155 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# 
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-11-04 11:20-0500\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: .\customuser\admin.py:11
+msgid "Personal info"
+msgstr "Informacion Personal"
+
+#: .\customuser\admin.py:13
+msgid "Permissions"
+msgstr "Permisos"
+
+#: .\customuser\admin.py:25
+msgid "Important dates"
+msgstr "Fechas Importantes"
+
+#: .\products\templates\products\add_product_form.html:8
+msgid "Add New Product"
+msgstr "Agregar Nuevo Producto"
+
+#: .\products\templates\products\add_product_form.html:10
+msgid "Save"
+msgstr "Guardar"
+
+#: .\products\templates\products\cart.html:7
+msgid "Shipping Cart"
+msgstr "Carrito de Compras"
+
+#: .\products\templates\products\cart.html:14
+msgid "Quantity"
+msgstr "Cantidad"
+
+#: .\products\templates\products\cart.html:15
+#: .\products\templates\products\product_detail.html:24
+#: .\products\templates\products\products.html:14
+msgid "Price"
+msgstr "Precio"
+
+#: .\products\templates\products\cart.html:19
+msgid "Remove From Shipping Cart"
+msgstr "Eliminar del Carrito de Compras"
+
+#: .\products\templates\products\cart.html:24
+msgid "Total Cost"
+msgstr "Costo Total"
+
+#: .\products\templates\products\cart.html:26
+msgid "Go to Checkout"
+msgstr "Ir al Pago"
+
+#: .\products\templates\products\cart.html:28
+msgid "Any Products in Shipping Cart yet"
+msgstr "Aun no hay Prouctos en el Carrito de Compras"
+
+#: .\products\templates\products\cart.html:31
+msgid "Go to Buy"
+msgstr "Ir a Comprar"
+
+#: .\products\templates\products\filter_bar.html:5
+msgid "Search products..."
+msgstr "Buscar Productos..."
+
+#: .\products\templates\products\filter_bar.html:6
+msgid "Search"
+msgstr "Buscar"
+
+#: .\products\templates\products\product_detail.html:13
+msgid "Description"
+msgstr "Descripcion"
+
+#: .\products\templates\products\product_detail.html:15
+msgid "Category"
+msgstr "Categoria"
+
+#: .\products\templates\products\product_detail.html:16
+msgid "Platform"
+msgstr "Plataforma"
+
+#: .\products\templates\products\product_detail.html:18
+msgid "Gender"
+msgstr "Genero"
+
+#: .\products\templates\products\product_detail.html:28
+#: .\products\templates\products\product_detail.html:31
+msgid "Add to Cart"
+msgstr "Añadir al Carrito"
+
+#: .\products\templates\products\products.html:18
+msgid "Delete"
+msgstr "Eliminar"
+
+#: .\products\templates\products\products.html:25
+#: .\products\templates\products\search_results.html:27
+msgid "No Products Available"
+msgstr "No hay Productos Disponibles"
+
+#: .\products\templates\products\singin.html:8
+msgid "SignIn SBGameShop"
+msgstr "Inicia Sesion en SBGameShop "
+
+#: .\products\templates\products\singin.html:18
+msgid "Need Help?"
+msgstr "¿Necesitas ayuda?"
+
+#: .\products\templates\products\singin.html:19
+msgid "Forgot Password?"
+msgstr "¿Olvidaste tu Contraseña?"
+
+#: .\products\templates\products\singin.html:23
+msgid "New in SBGameShop?"
+msgstr "¿Eres nuevo en SBGameShop?"
+
+#: .\products\templates\products\singin.html:24
+msgid "Create an Account"
+msgstr "Crear una Cuenta"
+
+#: .\products\templates\products\singup.html:10
+msgid "SignUp SBGameShop"
+msgstr "SignUp SBGameShop"
+
+#: .\products\templates\products\singup.html:20
+msgid "Have an Account?"
+msgstr "¿Ya tienes una cuenta?"
+
+#: .\products\templates\products\singup.html:21
+msgid "SingIn"
+msgstr "Inicia Sesion"
+
+#: .\products\views.py:51
+msgid "The user already exists"
+msgstr "El Usuario ya existe"
+
+#: .\products\views.py:61
+msgid "Passwords do not match"
+msgstr "Las contraseñas no son iguales"
+
+#: .\products\views.py:96
+msgid "Incorrect username or password"
+msgstr "Usuario o contraseña Incorrecto"

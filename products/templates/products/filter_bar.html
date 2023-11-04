@@ -1,6 +1,8 @@
+{% load i18n %}
+
 <div class="filter_bar">
     <form action="{% url 'search_results' %}" method="get">
-        <input type="text" name="query" placeholder="Buscar productos...">
-        <button type="submit">Buscar</button>
+        <input type="text" name="query" placeholder="{% trans 'Search products...' %}">
+        <button type="submit">{% trans 'Search' %}</button>
     </form>
 </div>

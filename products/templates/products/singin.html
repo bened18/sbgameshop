@@ -1,11 +1,11 @@
 {% extends 'products/base.html' %}
-
+{% load i18n %}  <!-- Carga la biblioteca de internacionalización -->
 {% block content %} 
     <div class="login-form-container">
         {{message}}
         <form class="login-form" action="/singin/" method="post">
             {% csrf_token %}
-            <h2>Iniciar sesión en SBGAMESHOP</h2>
+            <h2>{% trans "SignIn SBGameShop" %}</h2>
             {{form.as_div}}
             <button>
                 SingIn
@@ -15,13 +15,13 @@
 
     <div class="login-help-container">
         <div>
-            <p>¿Necesitas ayuda?</p>
-            <a href="./">¿Olvidaste tu contraseña?</a>
+            <p>{% trans "Need Help?" %}</p>
+            <a href="./">{% trans "Forgot Password?" %}</a>
         </div>
 
         <div>
-            <p>¿Eres nuevo en SBGameShop?</p>
-            <a class="create-account-link" href="/singupform/">Crea una cuenta</a>
+            <p>{% trans "New in SBGameShop?" %}</p>
+            <a class="create-account-link" href="/singupform/">{% trans "Create an Account" %}</a>
         </div>
     </div>
 

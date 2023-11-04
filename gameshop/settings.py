@@ -51,6 +51,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'django.middleware.locale.LocaleMiddleware', 
 ]
 
 ROOT_URLCONF = 'gameshop.urls'
@@ -107,13 +108,23 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/4.2/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'en-us'  # El idioma predeterminado de la aplicación
 
-TIME_ZONE = 'UTC'
+LANGUAGES = [  # Los idiomas que tu aplicación soportará
+    ('en', 'English'),
+    ('es', 'Spanish'),
+    # Agrega más idiomas aquí si es necesario
+]
 
-USE_I18N = True
+LOCALE_PATHS = (  # La ruta donde Django buscará los archivos de traducción
+    os.path.join(BASE_DIR, 'locale'),
+)
 
-USE_TZ = True
+USE_I18N = True  # Activa la internacionalización de Django
+
+USE_L10N = True  # Activa la localización de Django
+
+USE_TZ = True  # Activa el soporte de zonas horarias
 
 
 # Static files (CSS, JavaScript, Images)

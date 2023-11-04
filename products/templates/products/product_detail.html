@@ -1,4 +1,5 @@
 {% extends 'products/base.html' %}
+{% load i18n %}  <!-- Carga la biblioteca de internacionalización -->
 
 {% block content %}
 
@@ -9,25 +10,25 @@
         </div>
         <div class="product-detail-details">
             <h2 class="product-detail-name">{{ product.name }}</h2>
-            <h3 class="product-detail-name">Descripción</h3>
+            <h3 class="product-detail-name">{% trans "Description" %}</h3>
             <p class="product-detail-description">{{ product.description }}</p>
-            <p class="product-detail-description"><strong>Categoria:</strong> {{ product.category }}</p>
-            <p class="product-detail-description"> <strong>Plataforma:</strong> {{ product.platform }}</p>
+            <p class="product-detail-description"><strong>{% trans "Category" %}:</strong> {{ product.category }}</p>
+            <p class="product-detail-description"> <strong>{% trans "Platform" %}:</strong> {{ product.platform }}</p>
             {% if product.genres.all %}
-                <p class="product-detail-description"> <strong>Géneros:</strong>
+                <p class="product-detail-description"> <strong>{% trans "Gender" %}:</strong>
                     {% for genre in product.genres.all %}
                         {{ genre.name }}{% if not forloop.last %}, {% endif %}
                     {% endfor %}
                 </p>
             {% endif %}
-            <p class="product-detail-price">Precio: {{ product.price|floatformat:"3" }}</p>
+            <p class="product-detail-price">{% trans "Price" %}: {{ product.price|floatformat:"3" }}</p>
             {% if user.is_authenticated %}
                 <form action="{% url 'add_to_cart' product_id=product.id %}" method="POST">
                     {% csrf_token %}
-                    <button class="add-to-cart-button" type="submit">Añadir al carrito</button>
+                    <button class="add-to-cart-button" type="submit">{% trans "Add to Cart" %}</button>
                 </form>
             {% else %}
-            <a class="add-to-cart-button" href="{% url 'singin' %}" class="auth-link">Añadir al carrito</a>
+            <a class="add-to-cart-button" href="{% url 'singin' %}" class="auth-link">{% trans "Add to Cart" %}</a>
             {% endif %}
         </div>
     </div>
