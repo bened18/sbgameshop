@@ -1,0 +1,16 @@
+{% extends 'products/base.html' %}
+
+{% block content %}
+  <h1>Productos Externos Techmond</h1>
+
+  <div class="products-container">
+    {% for producto in productos_externos %}
+      <div class="product-container">
+        <img class="prodcut-container-img" src="{{ producto.product_image }}" alt="{{ producto.name }}">
+        <h2 class="product-container-name">{{ producto.name }}</h2>
+        <p class="prodcut-container-price">Precio: ${{ producto.price }}</p>
+        <p class="product-detail-description">{{ producto.description }}</p>
+      </div>
+    {% endfor %}
+  </div>
+{% endblock %}

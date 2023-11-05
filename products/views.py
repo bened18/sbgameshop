@@ -16,6 +16,8 @@ from django.utils.decorators import method_decorator
 
 from django.http import JsonResponse
 from django.core import serializers
+import requests
+
 
 
 class SingUpView(TemplateView):
@@ -281,3 +283,31 @@ class ProductosJsonView(View):
 
         # Devuelve la lista de productos en formato JSON
         return JsonResponse({'productos': productos_list}, safe=False)
+    
+class ObtenerProductosExternosView(View):
+    
+
+    def get(self, request):
+        template_name = "products/productos_externos.html"
+        # URL de la API externa
+        url_api_externa = "http://127.0.0.1:8080/api/products/"
+
+        try:
+            # Realiza una solicitud GET a la API externa
+            response = requests.get(url_api_externa)
+
+            # Verifica si la solicitud fue exitosa (código de estado 200)
+            if response.status_code == 200:
+                # Convierte la respuesta JSON en una lista de productos
+                productos_externos = response.json()
+
+                # Renderiza el template con los productos externos como contexto
+                return render(request, template_name, {'productos_externos': productos_externos})
+
+            else:
+                # Si la solicitud no fue exitosa, devuelve un mensaje de error
+                return JsonResponse({'error': 'No se pudo obtener la información de la API externa.'}, status=500)
+
+        except requests.exceptions.RequestException as e:
+            # Maneja posibles errores de conexión
+            return JsonResponse({'error': 'Error de conexión a la API externa: ' + str(e)}, status=500)
