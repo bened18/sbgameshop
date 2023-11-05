@@ -1,7 +1,7 @@
 from django.urls import path
 from .views import ProductView, ProductDetail, AddToCart
 from .views import SingUpView, SingOut, SingIn, CartView
-from .views import DeleteCartItem, SearchResultsView, FilterResultsView, AddProductView, DeleteProductView
+from .views import DeleteCartItem, SearchResultsView, FilterResultsView, AddProductView, DeleteProductView, ProductosJsonView
 
 
 urlpatterns = [
@@ -17,4 +17,5 @@ urlpatterns = [
     path('delete_cart_item/<int:cart_item_id>', DeleteCartItem.as_view(), name='delete_cart_item'),
     path('editor_add_product', AddProductView.as_view(), name='editor_add_product'),
     path('product/<int:product_id>/delete/', DeleteProductView.as_view(), name='delete_product'),
+    path('api/productos/', ProductosJsonView.as_view(), name='obtener_productos_json'),
 ]

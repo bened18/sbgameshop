@@ -14,6 +14,9 @@ from django.contrib.auth import login, logout, authenticate
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
 
+from django.http import JsonResponse
+from django.core import serializers
+
 
 class SingUpView(TemplateView):
     template_name = "products/singup.html"
@@ -254,3 +257,27 @@ class DeleteProductView(View):
         # Elimina el producto.
         product.delete()
         return redirect('home')  # Cambia 'product_list' a la URL adecuada.
+
+class ProductosJsonView(View):
+
+    def get(self, request):
+        productos = Product.objects.all()
+    
+        # Crea una lista para almacenar los productos de forma ordenada
+        productos_list = []
+    
+        for producto in productos:
+            producto_dict = {
+                'id': producto.pk,
+                'name': producto.name,
+                'category': producto.category.name,
+                'platform': producto.platform.name,
+                'description': producto.description,
+                'price': producto.price,
+                'image': producto.image.url,
+                'genres': [genre.name for genre in producto.genres.all()]
+            }
+            productos_list.append(producto_dict)
+
+        # Devuelve la lista de productos en formato JSON
+        return JsonResponse({'productos': productos_list}, safe=False)
