@@ -33,6 +33,7 @@ class Product(models.Model):
     platform = models.ForeignKey(Platform, on_delete=models.CASCADE)
     description = models.TextField()
     price = models.FloatField()
+#    price_usd = models.FloatField()
     image = models.ImageField(upload_to='media/product_images/')
     genres = models.ManyToManyField(Genre, blank=True)  # For video game genres
 

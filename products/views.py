@@ -19,7 +19,6 @@ from django.core import serializers
 import requests
 
 
-
 class SingUpView(TemplateView):
     template_name = "products/singup.html"
 
@@ -113,12 +112,33 @@ class ProductView(TemplateView):
 
     # Mostrar todos los productos de la base de datos
     def get(self, request):
-        viewData = {
+        # Llamada a la API para obtener la tasa de cambio
+        response = requests.get('https://v6.exchangerate-api.com/v6/9db1c20e7f6dbe3b410e777f/latest/USD')
+        if response.status_code == 200:
+            data = response.json()
+            exchange_rate = data['conversion_rates']['COP']
+
             # Obtenemos todos los productos de la base de datos
-            "products": Product.objects.all()
-        }
-        # Enviamos todos los productos a products.html para ser mostrados
-        return render(request, self.template_name, viewData)
+            products = Product.objects.all()
+
+            # Agregar el precio en USD a cada producto
+            for product in products:
+                product.price_usd = (product.price / exchange_rate)*1000
+                
+
+            # Enviamos todos los productos a products.html para ser mostrados
+            viewData = {
+                "products": products
+            }
+            return render(request, self.template_name, viewData)
+        else:
+            # Manejar el caso en que la API no responde adecuadamente
+            # Aquí puedes decidir cómo manejar este error, por ejemplo, mostrando un mensaje
+            # o utilizando una tasa de cambio predeterminada.
+            viewData = {
+                "error": "No se pudo obtener la tasa de cambio actual."
+            }
+            return render(request, self.template_name, viewData)
 
 
 class SearchResultsView(View):

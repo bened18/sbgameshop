@@ -10,8 +10,9 @@
                 {% else %}
                     <img src="/media/product_images/logo_sin_fondo.png" alt="{{ product.name }}">
                 {% endif %}
-                    <a class="product-container-name" href="{% url 'product_detail' product_id=product.id %}">{{product.name}}</a>
-                    <p class="prodcut-container-price">{% trans "Price" %}: ${{product.price|floatformat:"3"}}</p>
+                <a class="product-container-name" href="{% url 'product_detail' product_id=product.id %}">{{ product.name }}</a>
+                <p class="prodcut-container-price">{% trans "Price" %}: ${{ product.price|floatformat:"3" }} COP</p>
+                <p class="prodcut-container-price">{% trans "Price" %}: ${{ product.price_usd|floatformat:"2" }} USD</p>
                 {% if user.is_editor %}
                     <form method="post" action="{% url 'delete_product' product_id=product.id %}">
                         {% csrf_token %}
