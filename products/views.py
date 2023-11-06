@@ -285,12 +285,11 @@ class ProductosJsonView(View):
         return JsonResponse({'productos': productos_list}, safe=False)
     
 class ObtenerProductosExternosView(View):
-    
 
     def get(self, request):
         template_name = "products/productos_externos.html"
         # URL de la API externa
-        url_api_externa = "http://127.0.0.1:8080/api/products/"
+        url_api_externa = "http://34.136.78.13:8000/api/products/"
 
         try:
             # Realiza una solicitud GET a la API externa

@@ -19,10 +19,10 @@
             <li><a href="{% url 'view_cart' %}" class="auth-link">Shipping Cart</a></li>
             <li><a href="{% url 'singout' %}" class="auth-link">Log Out</a></li>
           {% else %}
-            <li><a href="{% url 'productos_externos_json' %}">Techmond</a></li>
             <li><a href="{% url 'singin' %}" class="auth-link">Sign In</a></li>
             <li><a href="{% url 'singupform' %}" class="auth-link">Sign Up</a></li>
           {% endif %}
+          <li><a href="{% url 'productos_externos_json' %}">Techmond</a></li>
         </ul>
       </nav>
     </header>
