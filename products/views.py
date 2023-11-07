@@ -319,7 +319,16 @@ class ObtenerProductosExternosView(View):
             if response.status_code == 200:
                 # Convierte la respuesta JSON en una lista de productos
                 productos_externos = response.json()
+                # Itera sobre los productos externos y actualiza la URL de la imagen
+                for producto_externo in productos_externos:
+                    # Obtiene la URL de la imagen original
+                    imagen_original_url = producto_externo['product_image']
+        
+                    # Reemplaza la parte de la URL que deseas cambiar
+                    nueva_url = imagen_original_url.replace("http://34.136.78.13:8000/product_image/", "http://34.136.78.13:8000/static/product_image/")
 
+                    # Actualiza la URL en el diccionario del producto
+                    producto_externo['product_image'] = nueva_url
                 # Renderiza el template con los productos externos como contexto
                 return render(request, template_name, {'productos_externos': productos_externos})
 

@@ -178,7 +178,7 @@ header .filter_bar button:hover {
 }
 
 .product-container img {
-    margin: 5%;
+    margin: auto;
     width: 150px;
     height: 150px;
     border-radius: 30px;
