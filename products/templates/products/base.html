@@ -11,7 +11,7 @@
   <body class="body">
     <header>
       <a href="{% url 'home' %}" class="logo"><img src="/media/product_images/logo_sin_fondo.png" alt="logo sbgameshop"></a>
-      {% include 'products/filter_bar.html' %}
+      
       <nav>
         <ul class="nav__links">
           <li>{% if user.is_editor %}<a href="{% url 'editor_add_product' %}" class="auth-link">Add Product</a>{% endif %}</li>
@@ -25,6 +25,7 @@
           <li><a href="{% url 'productos_externos_json' %}">Techmond</a></li>
         </ul>
       </nav>
+      {% include 'products/filter_bar.html' %}
     </header>
 
     <div class="page-container">

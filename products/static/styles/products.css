@@ -394,3 +394,16 @@ header .filter_bar button:hover {
     padding: 10px;
     background-color: #f4f4f4;
 }
+
+@media(max-width:760px) {
+    header {
+        background-color: rgb(72, 4, 72);
+        display: flex;
+        height: auto;
+        align-items: center;
+        padding: 30px 10%;
+        flex-wrap: wrap;
+        text-align: center;
+        justify-content: center;
+    }
+}
